@@ -80,3 +80,4 @@ const factory = (client, lang = "en") => {
 }
 
 module.exports = factory;
+// main page
