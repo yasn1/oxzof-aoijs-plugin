@@ -32,7 +32,6 @@ const commands = (client, folder, lang) => {
             const fullPath = path.join(folderPath, file);
 
             try {
-                // Sadece dosyaları oku ve doğru formatı kontrol et
                 const stats = fs.statSync(fullPath);
                 if (stats.isFile() && path.extname(fullPath) === ".js") {
                     const content = require(fullPath);
