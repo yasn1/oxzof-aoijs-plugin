@@ -1,0 +1,20 @@
+{
+    "empty_token":"Client parametresini boş bırakamazsınız!",
+    "extra_loaded":"Extra fonksiyonlar başarıyla yüklendi!",
+    "extra_error":"Extra fonksiyonlar yüklenemedi!",
+    "trailer":"[ OXZOF | api.oxzof.com ] Aoi.js Plugini Başarıyla çalıştırıldı!\n",
+    "variable_file_error":"Değişken dosyası bulunamadı!",
+    "variable_file_format_error":"Değişken dosyasının formatı JSON biçiminde olmalı!",
+    "variable_loaded":"Değişken dosyası başarıyla ayarlandı!",
+    "variable_error":"Değişken dosya yolunda hata ile karşılaşıldı!",
+    "commands_loaded":"Komut yükleme işlemi Gerçekleştirildi!",
+    "commands_error":"Komut yükleme işlemi sırasında hata meydana geldi!",
+    "commands_folder_error":"Komut klasörüne erişilemiyor!",
+    "customfunctions_loaded":"Özel fonksiyonlar yüklendi!",
+    "customfunctions_error":"Özel fonksiyon klasörü yüklenirken hata oluştu!",
+    "customfunction_folder_error":"Özel fonksiyon klasörü bulunamadı!",
+    "customfunction_folder_empty":"Özel fonksiyon klasöründe .js dosyası bulunamadı!",
+    "customFunction_file_format_error":"Geçersiz özel fonksiyon dosyası:",
+    "customFunction_file_load_error":"Özel fonksiyon yüklenemedi!",
+    "new_version_available":"Yeni Versiyon Yayınlandı! Paketinizi güncelleyin npm i oxzof-aoijs-plugin@latest\nDeğişiklikleri incelemek için github sayfasını ziyaret edebilirsiniz."
+}

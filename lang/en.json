@@ -1,0 +1,20 @@
+{
+    "empty_token":"You cannot leave the client parameter empty!",
+    "extra_loaded":"Extra functions loaded successfully!",
+    "extra_error":"Failed to load extra functions!",
+    "trailer":"[ OXZOF | api.oxzof.com ] Aoi.js Plugin has been run successfully!\n",
+    "variable_file_error":"Variable file not found!",
+    "variable_file_format_error":"The format of the variable file must be in JSON format!",
+    "variable_loaded":"Variable file loaded successfully!",
+    "variable_error":"Error encountered in variable file path!",
+    "commands_loaded":"Command loading Completed!",
+    "commands_error":"An error occurred while loading the commands!",
+    "commands_folder_error":"Cannot access command folder!",
+    "customfunctions_loaded":"Custom functions loaded!",
+    "customfunctions_error":"Error loading custom functions folder!",
+    "customfunction_folder_error":"Custom function folder not found!",
+    "customfunction_folder_empty":"No .js file found in custom function folder!",
+    "customFunction_file_format_error":"Invalid custom function file:",
+    "customFunction_file_load_error":"Could not load custom function!",
+    "new_version_available":"New Version Released! Update your package npm i oxzof-aoijs-plugin@latest\nYou can visit the github page to review the changes."
+}
