@@ -1,12 +1,17 @@
 {
   "name": "oxzof-aoijs-plugin",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "This aoi.js plugin offers extra commands and streamlined functions.",
   "main": "plugin.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["oxzof","aoijs","aoi.js","plugin"],
+  "keywords": [
+    "oxzof",
+    "aoijs",
+    "aoi.js",
+    "plugin"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
