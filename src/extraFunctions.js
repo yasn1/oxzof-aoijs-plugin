@@ -121,12 +121,26 @@ const extras = (client) => {
                     code: d.util.setCode(data)
                 };
             }
+        },{
+            name:"escapeJSON",
+            type:"djs",
+            code: async d => {
+                const data = d.util.aoiFunc(d);
+                const [jsonString] = data.inside.splits;
+                try {
+                    const parsed = JSON.parse(jsonString);
+                    data.result = JSON.stringify(parsed);
+                } catch (error) {
+                    data.result = null;
+                }
+                return {
+                    code: d.util.setCode(data)
+                };
+            }
         });
         return true;
     } catch (err) {
         return false;
     }
-
-
 }
 module.exports = extras;
