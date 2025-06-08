@@ -1,6 +1,6 @@
 {
   "name": "oxzof-aoijs-plugin",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "This aoi.js plugin offers extra commands and streamlined functions.",
   "main": "plugin.js",
   "scripts": {
@@ -10,7 +10,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "aoi.js": "^6.9.0",
     "fs": "^0.0.1-security",
     "moment-timezone": "^0.5.46",
     "path": "^0.12.7"
