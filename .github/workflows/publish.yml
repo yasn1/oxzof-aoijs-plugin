@@ -3,7 +3,7 @@ name: Publish to NPM
 on:
   push:
     tags:
-      - 'v*' # Yalnızca v1.2.3 gibi tag'lerde çalışır
+      - 'v*'
 
 jobs:
   publish:
@@ -21,4 +21,3 @@ jobs:
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          
