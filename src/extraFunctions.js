@@ -121,7 +121,34 @@ const extras = (client) => {
                     code: d.util.setCode(data)
                 };
             }
-        });
+        },{
+            name: "$isValidClientToken",
+            type: "djs",
+            code: async d => {
+                const data = d.util.aoiFunc(d);
+                const token = data.inside.trim();
+        
+                const axios = require("axios");
+        
+                try {
+                    const res = await axios.get("https://discord.com/api/v10/users/@me", {
+                        headers: {
+                            Authorization: `Bot ${token}`
+                        }
+                    });
+        
+                    // Token geçerli
+                    data.result = "true";
+                } catch (err) {
+                    // Token geçersiz veya başka hata
+                    data.result = "false";
+                }
+        
+                return {
+                    code: d.util.setCode(data)
+                };
+            }
+      });
         return true;
     } catch (err) {
         return false;
