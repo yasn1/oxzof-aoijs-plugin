@@ -27,6 +27,7 @@ plugin.customFunctions("./customFunctions"); // Specify a folder for your custom
 | $findLowerChars[text;(seperator)] | Find only lowercase letters from the text. |
 | $matchRegex[text;regex] | Simplify your text processing. |
 | $toUnixTime[format;(timezone)] | Get unix timestamp of specific date. |
+| $isValidClientToken[token] | Checks the validity of the entered bot token. |
 
 ## Examples
 ```php
@@ -45,6 +46,8 @@ etc...
 $toUnixTime[20-12-2026 20:00:00;Europe/Istanbul] # 1797786000
 $toUnixTime[20-12-2026;Europe/Istanbul] # 1797714000 (day from 00:00)
 $toUnixTime[20:00:00;Europe/Istanbul] # 1736701200 (starting from 20:00 today)
+
+$isValidClientToken[ClientToken] // return true or false
 ```
 
 
