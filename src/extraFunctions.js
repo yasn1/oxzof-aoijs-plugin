@@ -148,7 +148,24 @@ const extras = (client) => {
                     code: d.util.setCode(data)
                 };
             }
-      });
+      },{
+            name: "$jsonValueEscape",
+            type: "djs",
+            code: async d => {
+                const data = d.util.aoiFunc(d);
+                const [text] = data.inside.splits;
+                
+                data.result = text
+                    .replace(/\\/g, '\\\\')
+                    .replace(/"/g, '\\"')
+                    .replace(/\n/g, '\\n')
+                    .replace(/\r/g, '\\r')
+                    .replace(/\t/g, '\\t');
+                return {
+                    code: d.util.setCode(data)
+                };
+            }
+        });
         return true;
     } catch (err) {
         return false;

@@ -28,6 +28,7 @@ plugin.customFunctions("./customFunctions"); // Specify a folder for your custom
 | $matchRegex[text;regex] | Simplify your text processing. |
 | $toUnixTime[format;(timezone)] | Get unix timestamp of specific date. |
 | $isValidClientToken[token] | Checks the validity of the entered bot token. |
+| $jsonValueEscape[text] | Escapes special characters in JSON values. |
 
 ## Examples
 ```php
@@ -48,6 +49,9 @@ $toUnixTime[20-12-2026;Europe/Istanbul] # 1797714000 (day from 00:00)
 $toUnixTime[20:00:00;Europe/Istanbul] # 1736701200 (starting from 20:00 today)
 
 $isValidClientToken[ClientToken] // return true or false
+
+
+$jsonValueEscape[hello "there" this is potato] // return hello \"there\" this is potato
 ```
 
 
