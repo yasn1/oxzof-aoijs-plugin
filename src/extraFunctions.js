@@ -177,6 +177,9 @@ const extras = (client) => {
                             const [command, type = "all", max = "10", splitter = ", ", getAliases = "true", filters = "$alwaysExecute, AndMore"] = data.inside.splits;
                             const types = d.client.loader.paths[0].commandsLocation.types;
                             types.push("all")
+                            if(!command){
+                                return d.aoiError.fnError(d, "custom", { inside: data.inside }, ":x: No command provided for $alternativeCommands.");
+                            }
                             if (!types.includes(type)) {
                                 return d.aoiError.fnError(d, "custom", { inside: data.inside }, ":x: Invalid type provided for $alternativeCommands. Available types: " + types.join(", "));
                             }

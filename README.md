@@ -29,7 +29,7 @@ plugin.customFunctions("./customFunctions"); // Specify a folder for your custom
 | $toUnixTime[format;(timezone)] | Get unix timestamp of specific date. |
 | $isValidClientToken[token] | Checks the validity of the entered bot token. |
 | $jsonValueEscape[text] | Escapes special characters in JSON values. |
-| $alternativeCommands[command, (type), (max), (getAliases), (filters)] | Suggests alternative commands based on the command type you have selected and available on your bot |
+| $alternativeCommands[command;(type);(max);(getAliases);(filters)] | Suggests alternative commands based on the command type you have selected and available on your bot |
 
 ## Examples
 ```php
