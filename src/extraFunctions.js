@@ -169,88 +169,8 @@ const extras = (client) => {
                         headers: {
                             Authorization: `Bot ${token}`
                         }
-                    }, {
-                        name: "$alternativeCommands",
-                        type: "djs",
-                        code: async d => {
-                            const data = d.util.aoiFunc(d);
-                            const [command, type = "all", max = "10", splitter = ", ", getAliases = "true", filters = "$alwaysExecute, AndMore"] = data.inside.splits;
-                            const types = d.client.loader.paths[0].commandsLocation.types;
-                            types.push("all")
-                            if(!command){
-                                return d.aoiError.fnError(d, "custom", { inside: data.inside }, ":x: No command provided for $alternativeCommands.");
-                            }
-                            if (!types.includes(type)) {
-                                return d.aoiError.fnError(d, "custom", { inside: data.inside }, ":x: Invalid type provided for $alternativeCommands. Available types: " + types.join(", "));
-                            }
-                            if (parseInt(max) == 0 || parseInt(max) < -1 || isNaN(parseInt(max))) {
-                                return d.aoiError.fnError(d, "custom", { inside: data.inside }, ":x: Invalid max value provided for $alternativeCommands. Must be greater than -1 or 0.");
-                            }
-                            let commands = [];
-                            d.client.loader.paths.forEach(path => {
-                                if (type === "all") {
-                                    types.forEach(t => {
-                                        if (t == "all") return;
-                                        const map = path.commandsLocation[t];
-                                        console.log(map)
-                                        if (map instanceof Map) {
-                                            commands.push(...Array.from(map.values()).map(cmd => cmd?.name));
-
-                                            Array.from(map.values()).forEach(cmd => {
-                                                const aliases = Array.isArray(cmd.aliases) ? cmd.aliases : [cmd?.aliases];
-                                                aliases.forEach(alias => {
-                                                    if (alias && getAliases == "true") commands.push(alias);
-                                                });
-                                            });
-                                        }
-                                    });
-                                } else {
-                                    const container = path.commandsLocation[type];
-
-                                    if (container && typeof container === 'object') {
-                                        const maps = Object.values(container).filter(value => value instanceof Map);
-                                        if (maps.length > 0) {
-                                            maps.forEach(map => {
-                                                commands.push(...Array.from(map.values()).map(cmd => cmd?.name).filter(Boolean));
-
-                                                Array.from(map.values()).forEach(cmd => {
-                                                    let aliases = cmd?.aliases;
-                                                    if (!aliases) return;
-                                                    if (!Array.isArray(aliases)) aliases = [aliases];
-
-                                                    aliases.forEach(alias => {
-                                                        if (alias && getAliases == "true") commands.push(alias);
-                                                    });
-                                                });
-                                            });
-                                        } else {
-                                            commands.push(...Array.from(path.commandsLocation[type].values()).map(cmd => cmd?.name));
-                                            path.commandsLocation[type].map(cmd => cmd?.aliases).forEach((item) => {
-                                                if (item) {
-                                                    if (!Array.isArray(item)) item = [item];
-                                                    item.map(alias => {
-                                                        if (getAliases == "true") { commands.push(alias); }
-                                                    })
-                                                }
-                                            })
-                                        }
-                                    }
-                                }
-                            })
-                            filters.split(", ").forEach(filterItem => {
-                                commands = commands.filter(cmd => cmd !== filterItem)
-                            })
-                            const matches = findBestMatches(command, commands);
-                            if (max == -1) {
-                                data.result = matches.map(match => match.target).join(splitter);
-                            } else {
-                                data.result = matches.slice(0, parseInt(max)).map(match => match.target).join(splitter);
-                            }
-                            return {
-                                code: d.util.setCode(data)
-                            };
-                        }
-                    });
+                    })
+                    
                     data.result = "true";
                 } catch (err) {
                     data.result = "false";
@@ -260,6 +180,7 @@ const extras = (client) => {
                     code: d.util.setCode(data)
                 };
             }
+
         }, {
             name: "$jsonValueEscape",
             type: "djs",
@@ -273,6 +194,87 @@ const extras = (client) => {
                     .replace(/\n/g, '\\n')
                     .replace(/\r/g, '\\r')
                     .replace(/\t/g, '\\t');
+                return {
+                    code: d.util.setCode(data)
+                };
+            }
+        }, {
+            name: "$alternativeCommands",
+            type: "djs",
+            code: async d => {
+                const data = d.util.aoiFunc(d);
+                const [command, type = "all", max = "10", splitter = ", ", getAliases = "true", filters = "$alwaysExecute, AndMore"] = data.inside.splits;
+                const types = d.client.loader.paths[0].commandsLocation.types;
+                types.push("all")
+                if (!command) {
+                    return d.aoiError.fnError(d, "custom", { inside: data.inside }, ":x: No command provided for $alternativeCommands.");
+                }
+                if (!types.includes(type)) {
+                    return d.aoiError.fnError(d, "custom", { inside: data.inside }, ":x: Invalid type provided for $alternativeCommands. Available types: " + types.join(", "));
+                }
+                if (parseInt(max) == 0 || parseInt(max) < -1 || isNaN(parseInt(max))) {
+                    return d.aoiError.fnError(d, "custom", { inside: data.inside }, ":x: Invalid max value provided for $alternativeCommands. Must be greater than -1 or 0.");
+                }
+                let commands = [];
+                d.client.loader.paths.forEach(path => {
+                    if (type === "all") {
+                        types.forEach(t => {
+                            if (t == "all") return;
+                            const map = path.commandsLocation[t];
+                            console.log(map)
+                            if (map instanceof Map) {
+                                commands.push(...Array.from(map.values()).map(cmd => cmd?.name));
+
+                                Array.from(map.values()).forEach(cmd => {
+                                    const aliases = Array.isArray(cmd.aliases) ? cmd.aliases : [cmd?.aliases];
+                                    aliases.forEach(alias => {
+                                        if (alias && getAliases == "true") commands.push(alias);
+                                    });
+                                });
+                            }
+                        });
+                    } else {
+                        const container = path.commandsLocation[type];
+
+                        if (container && typeof container === 'object') {
+                            const maps = Object.values(container).filter(value => value instanceof Map);
+                            if (maps.length > 0) {
+                                maps.forEach(map => {
+                                    commands.push(...Array.from(map.values()).map(cmd => cmd?.name).filter(Boolean));
+
+                                    Array.from(map.values()).forEach(cmd => {
+                                        let aliases = cmd?.aliases;
+                                        if (!aliases) return;
+                                        if (!Array.isArray(aliases)) aliases = [aliases];
+
+                                        aliases.forEach(alias => {
+                                            if (alias && getAliases == "true") commands.push(alias);
+                                        });
+                                    });
+                                });
+                            } else {
+                                commands.push(...Array.from(path.commandsLocation[type].values()).map(cmd => cmd?.name));
+                                path.commandsLocation[type].map(cmd => cmd?.aliases).forEach((item) => {
+                                    if (item) {
+                                        if (!Array.isArray(item)) item = [item];
+                                        item.map(alias => {
+                                            if (getAliases == "true") { commands.push(alias); }
+                                        })
+                                    }
+                                })
+                            }
+                        }
+                    }
+                })
+                filters.split(", ").forEach(filterItem => {
+                    commands = commands.filter(cmd => cmd !== filterItem)
+                })
+                const matches = findBestMatches(command, commands);
+                if (max == -1) {
+                    data.result = matches.map(match => match.target).join(splitter);
+                } else {
+                    data.result = matches.slice(0, parseInt(max)).map(match => match.target).join(splitter);
+                }
                 return {
                     code: d.util.setCode(data)
                 };
