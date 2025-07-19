@@ -29,14 +29,18 @@ plugin.customFunctions("./customFunctions"); // Specify a folder for your custom
 | $toUnixTime[format;(timezone)] | Get unix timestamp of specific date. |
 | $isValidClientToken[token] | Checks the validity of the entered bot token. |
 | $jsonValueEscape[text] | Escapes special characters in JSON values. |
+| $alternativeCommands[command, (type), (max), (getAliases), (filters)] | Suggests alternative commands based on the command type you have selected and available on your bot |
 
 ## Examples
 ```php
 $botListGuild[, ] # guild1, guild 2, guild 3...
 
+
 $findUpperChars[Hi Everyone This Is MAGIC] # H E T I MAGIC
 
+
 $findLowerChars[Hi Everyone This Is MAGIC] # i veryone his s
+
 
 {number}, {string}, {boolean}, {any}
 $matchRegex[i will come to you in 10 seconds. wait for me.;{number} seconds] # 10 seconds
@@ -48,10 +52,14 @@ $toUnixTime[20-12-2026 20:00:00;Europe/Istanbul] # 1797786000
 $toUnixTime[20-12-2026;Europe/Istanbul] # 1797714000 (day from 00:00)
 $toUnixTime[20:00:00;Europe/Istanbul] # 1736701200 (starting from 20:00 today)
 
+
 $isValidClientToken[ClientToken] // return true or false
 
 
 $jsonValueEscape[hello "there" this is potato] // return hello \"there\" this is potato
+
+
+$alternativeCommands[truth;default;2;, ;true;$alwaysExecute, andMoreCommandNames] // example my command name is truth-or-dare and aliases truthordare. return truth-or-dare truthordare.
 ```
 
 
