@@ -24,10 +24,24 @@ function similarity(a, b) {
 }
 
 function findBestMatches(mainString, possibilities) {
-    const ratings = possibilities.map(str => ({
-        target: str,
-        rating: similarity(mainString.toLowerCase(), str.toLowerCase())
-    }));
+    const mainLower = mainString.toLowerCase();
+
+    const ratings = possibilities.map(str => {
+        const targetLower = str.toLowerCase();
+        let rating = similarity(mainLower, targetLower);
+        if (mainLower.length === targetLower.length) {
+            rating += 0.5;
+        }
+        if (mainLower === targetLower) {
+            rating += 1;
+        }
+
+        return {
+            target: str,
+            rating
+        };
+    });
+
     ratings.sort((a, b) => b.rating - a.rating);
     return ratings;
 }
